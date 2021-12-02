@@ -1,4 +1,4 @@
-dateRep,day,month,year,cases,deaths,countriesAndTerritories,geoId,countryterritoryCode,popData2018
+ARREST_DATE,day,month,year,cases,deaths,AGE_GROUP,geoId,countryterritoryCode,popData2018
 3/29/2020,29,3,2020,15,1,Afghanistan,AF,AFG,37172386
 3/28/2020,28,3,2020,16,1,Afghanistan,AF,AFG,37172386
 3/27/2020,27,3,2020,0,0,Afghanistan,AF,AFG,37172386
