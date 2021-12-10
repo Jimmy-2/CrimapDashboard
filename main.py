@@ -1,6 +1,6 @@
 #Name:  Jimmy Wu
 
-#Email: jimmy.wu87@myhunter.cuny.edu
+#Email: Removed for github upload
 
 #RESOURCES: Dataset: https://data.cityofnewyork.us/Public-Safety/NYPD-Arrest-Data-Year-to-Date-/uip8-fykc
 #Dash HTML Guide: https://dash.plotly.com/dash-html-components
