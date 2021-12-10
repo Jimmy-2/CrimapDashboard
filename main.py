@@ -38,11 +38,15 @@ app.layout = dash_table.DataTable(
 app.layout = html.Div([
     html.Div(
         children=[
+
             html.H1(
                 children="Crimap Dashboard", className="header-title"
             ),
-            html.H6(children="NYPD Arrest Data (Year to Date)"),
-            html.Img(src='/assets/arrestImage.jpg')
+            html.Div(html.Img(src='/assets/arrestImage.jpg'), style={'display': 'inline-block', 'height': '200px'}),
+            html.Div('NYPD Arrest Data (Year to Date)', style={'display': 'inline-block', 'height': '200px'})
+
+
+
 
 
         ],
