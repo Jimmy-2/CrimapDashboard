@@ -23,8 +23,8 @@ pie.update_layout(paper_bgcolor="plum")
 pie2 = px.pie(df, names='PERP_RACE')
 pie2.update_layout(paper_bgcolor="powderblue")
 fig = go.Figure()
-fig2 = px.histogram(df, x='PERP_RACE', nbins=20)
-fig3 = px.histogram(df, x='PERP_SEX', nbins=20)
+fig2 = px.histogram(df, x='PERP_RACE', nbins=20, color="PERP_RACE")
+fig3 = px.histogram(df, x='PERP_SEX', nbins=20, color="PERP_SEX")
 #---------------------------------------------------------------
 app.layout = dash_table.DataTable(
     id='table',
