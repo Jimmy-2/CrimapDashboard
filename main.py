@@ -34,9 +34,11 @@ app.layout = dash_table.DataTable(
 app.layout = html.Div([
     html.Div(
         children=[
-
             html.H1(
-                children="NYPD Arrest Data (Year to Date)", className="header-title"
+                children="Crimap Dashboard", className="header-title"
+            ),
+            html.H2(
+                children="NYPD Arrest Data (Year to Date)", className="header-subtitle"
             ),
 
         ],
@@ -44,6 +46,7 @@ app.layout = html.Div([
     ),
     dcc.Tabs([
         dcc.Tab(label='Graphs and Charts', children=[
+
             html.Div([
                 html.Div([
                     dcc.Graph(figure=pie),
@@ -67,6 +70,15 @@ app.layout = html.Div([
 
                     dcc.Graph(figure=fig2)
                 ], style={'width': '49%', 'float': 'right', 'display': 'inline-block'})
+
+            ]),
+
+            html.Div([
+                dash_table.DataTable(
+                    data=df.to_dict('records'),
+                    columns=[{'name': i, 'id': i} for i in df.columns],
+                    page_size=15
+                ),
 
             ]),
 
