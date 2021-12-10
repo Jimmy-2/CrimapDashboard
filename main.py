@@ -1,3 +1,17 @@
+#Name:  Jimmy Wu
+
+#Email: jimmy.wu87@myhunter.cuny.edu
+
+#RESOURCES: Dataset: https://data.cityofnewyork.us/Public-Safety/NYPD-Arrest-Data-Year-to-Date-/uip8-fykc
+#Dash HTML Guide: https://dash.plotly.com/dash-html-components
+#'Plotly Histogram Guide: https://plotly.com/python/histograms/
+#Map Guide: https://towardsdatascience.com/scatter-plots-on-maps-using-plotly-79f16aee17d0
+#Heroku Guide: https://www.youtube.com/watch?v=b-M2KQ6_bM4
+
+#URL: https://jimmy-testing.herokuapp.com/
+
+#TITLE: Crimap Dashboard
+
 import pandas as pd
 import plotly.express as px
 
