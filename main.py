@@ -94,12 +94,23 @@ app.layout = html.Div([
                     html.Div([
 
                         html.H6(children="Citations"),
-                        html.P('Dataset: https://data.cityofnewyork.us/Public-Safety/NYPD-Arrest-Data-Year-to-Date-/uip8-fykc'),
-                        html.P('Dash HTML Guide: https://dash.plotly.com/dash-html-components'),
-                        html.P('Plotly Histogram Guide: https://plotly.com/python/histograms/'),
-                        html.P('Map Guide: https://towardsdatascience.com/scatter-plots-on-maps-using-plotly-79f16aee17d0'),
-                        html.P('Heroku Guide: https://www.youtube.com/watch?v=b-M2KQ6_bM4')
+                        html.Label(['Dataset: ',  html.A('https://data.cityofnewyork.us/Public-Safety/NYPD-Arrest-Data-Year-to-Date-/uip8-fykc')]),
+                        html.Label(['Dash HTML Guide: ',  html.A('https://dash.plotly.com/dash-html-components')]),
+                        html.Label(['Plotly Histogram Guide: ',  html.A('https://plotly.com/python/histograms/')]),
+                        html.Label(['Map Guide: ',  html.A('https://towardsdatascience.com/scatter-plots-on-maps-using-plotly-79f16aee17d0')]),
+                        html.Label(['Heroku Guide: ', html.A('https://www.youtube.com/watch?v=b-M2KQ6_bM4')])
                     ], style={'width': '49%', 'float': 'right', 'display': 'inline-block'})
+
+                ]),
+
+                html.Div([
+                    html.Div([
+                        html.H6(children="Code:"),
+                        html.Label(['Github Link: ', html.A('https://github.com/Jimmy-2')])
+                    ],
+                        style={'width': '49%', 'display': 'inline-block'}),
+
+
 
                 ]),
 
