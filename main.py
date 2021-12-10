@@ -106,7 +106,7 @@ app.layout = html.Div([
                 html.Div([
                     html.Div([
                         html.H6(children="Code:"),
-                        html.Label(['Github Link: ', html.A('https://github.com/Jimmy-2')])
+                        html.Label(['Github Link: ', html.A('https://github.com/Jimmy-2/CrimapDashboard')])
                     ],
                         style={'width': '49%', 'display': 'inline-block'}),
 
