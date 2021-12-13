@@ -1,6 +1,6 @@
 #Name:  Jimmy Wu
 
-#Email: Removed for github upload
+#Email: jimmy.wu87@myhunter.cuny.edu
 
 #RESOURCES: Dataset: https://data.cityofnewyork.us/Public-Safety/NYPD-Arrest-Data-Year-to-Date-/uip8-fykc
 #Dash HTML Guide: https://dash.plotly.com/dash-html-components
@@ -9,7 +9,7 @@
 #Heroku Guide: https://www.youtube.com/watch?v=b-M2KQ6_bM4
 
 #URL: https://jimmy-testing.herokuapp.com/
-#
+
 #TITLE: Crimap Dashboard
 
 import pandas as pd
@@ -26,22 +26,15 @@ import plotly.graph_objects as go
 app = dash.Dash(__name__)
 server = app.server
 
-df = pd.read_csv("https://data.cityofnewyork.us/api/views/uip8-fykc/rows.csv?accessType=DOWNLOAD&bom=true&format=true")
+df = pd.read_csv("NYPD_Arrest_Data__Year_to_Date_.csv")
 
-dff = df.groupby('ARREST_PRECINCT', as_index=False)[['PERP_SEX','PERP_RACE']].sum()
-print (dff[:5])
-pie = px.pie(df, names='PERP_SEX', )
-pie.update_layout(paper_bgcolor="plum")
 
-pie2 = px.pie(df, names='PERP_RACE')
-pie2.update_layout(paper_bgcolor="powderblue")
 fig = go.Figure()
-fig2 = px.histogram(df, x='PERP_RACE', nbins=20, color="PERP_RACE")
-fig3 = px.histogram(df, x='PERP_SEX', nbins=20, color="PERP_SEX")
+
 
 px.set_mapbox_access_token("pk.eyJ1IjoiZWNjaGlmdWNrZXIiLCJhIjoiY2t3endqbGhxMGtpeTJ2bXJqOGg2b2RkZiJ9.PzATagpmMHlKAM4KB6AO9A")
 df['Description'] = ' '+ df['PERP_SEX'] + ', ' + df['PERP_RACE'] + ', ' + df['AGE_GROUP'] + ', ' + df['PD_DESC'].astype(str)
-fig5 = px.scatter_mapbox(df, lat="Latitude", lon="Longitude", color="ARREST_PRECINCT", text = "Description",)
+fig5 = px.scatter_mapbox(df, lat="Latitude", lon="Longitude", color="ARREST_PRECINCT", text = "Description")
 
 
 app.layout = dash_table.DataTable(
@@ -73,14 +66,14 @@ app.layout = html.Div([
                 html.Div([
 
                     html.Div([
-                        html.H6(children="Hypothesis"),
-                        html.P('While creating visual representations of the arrests data, I have come to a conclusion that the people that get arrested are more likely to be male than female.'),
+                        html.H6(children="Purpose"),
+                        html.P('The purpose of my project was to visualize the areas and locations that arrests occurred in and to do so, I had to choose a dataset that contained geographical or latitude and longitude data of arrests in NYC. '),
 
                     ],
                     style={'width': '49%', 'display': 'inline-block'}),
                     html.Div([
                         html.H6(children="Dataset Analysis"),
-                        html.P('While I was able to easily create a scatterplot map with the latitude and longtitude columns, I was unable to easily create a non-histogram chart/graph due to the lack of columns with numerical data. The only columns with numerical data are area descriptions/locations.'),
+                        html.P('One major problem of my dataset was the lack of numerical data as the dataset was entirely of individual arrests and their specific descriptions/location of arrest. This meant that while I am able to create an extremely descriptive map of the individual arrests, I am unable to provide a descriptive visualization of a broader area of arrests. Since I was not provided with much numerical data, I could only make histograms and pie charts of the data provided.'),
 
                     ], style={'width': '49%', 'float': 'right', 'display': 'inline-block'})
                 ]),
@@ -118,37 +111,66 @@ app.layout = html.Div([
         dcc.Tab(label='Graphs and Charts', children=[
 
             html.Div([
-                html.Div([
-                    dcc.Graph(figure=pie),
-                ],
-                    style={'width': '49%', 'display': 'inline-block'}),
-
-                html.Div([
-
-                    dcc.Graph(figure=pie2),
-                ], style={'width': '49%', 'float': 'right', 'display': 'inline-block'})
-
-            ]),
-            html.Div([
-                html.Div([
-                    dcc.Graph(figure=fig3)
-
-                ],
-                    style={'width': '49%', 'display': 'inline-block'}),
-
-                html.Div([
-
-                    dcc.Graph(figure=fig2)
-                ], style={'width': '49%', 'float': 'right', 'display': 'inline-block'})
-
-            ]),
-
-            html.Div([
                 dash_table.DataTable(
                     data=df.to_dict('records'),
                     columns=[{'name': i, 'id': i} for i in df.columns],
                     page_size=15
                 ),
+
+            ]),
+            html.Div([
+                html.Div([
+
+                    dcc.Dropdown(id='dropdown1',
+                                 options=[
+                                     {'label': 'Arrest Borough', 'value': 'ARREST_BORO'},
+                                     {'label': 'Arrest Precinct', 'value': 'ARREST_PRECINCT'},
+                                     {'label': 'PD Description', 'value': 'PD_DESC'},
+                                     {'label': 'Offense Description', 'value': 'OFNS_DESC'},
+                                     {'label': 'Age Group', 'value': 'AGE_GROUP'},
+                                     {'label': 'Sex', 'value': 'PERP_SEX'},
+                                     {'label': 'Race', 'value': 'PERP_RACE'}
+                                 ],
+                                 value='ARREST_BORO',
+                                 disabled=False,
+                                 multi=False,
+                                 searchable=True,
+                                 clearable=True,
+                                 optionHeight=20,
+
+                                 ),
+
+
+                ]),
+                dcc.Graph(id='pie1'),
+
+
+            ]),
+            html.Div([
+                html.Div([
+                    dcc.Dropdown(id='dropdown2',
+                                 options=[
+                                     {'label': 'Arrest Borough', 'value': 'ARREST_BORO'},
+                                     {'label': 'Arrest Precinct', 'value': 'ARREST_PRECINCT'},
+                                     {'label': 'Age Group', 'value': 'AGE_GROUP'},
+                                     {'label': 'Sex', 'value': 'PERP_SEX'},
+                                     {'label': 'Race', 'value': 'PERP_RACE'}
+                                 ],
+                                 value='ARREST_BORO',
+                                 disabled=False,
+                                 multi=False,
+                                 searchable=True,
+                                 clearable=True,
+                                 optionHeight=20,
+
+                                 ),
+
+
+
+                ]),
+                dcc.Graph(id='hist1'),
+
+
 
             ]),
 
@@ -161,7 +183,7 @@ app.layout = html.Div([
             label='Map', children=[
                 html.Div([
 
-                    dcc.Graph(figure=fig5),
+                    # dcc.Graph(figure=fig5),
                 ],)
             ]),
 
@@ -172,58 +194,36 @@ app.layout = html.Div([
 
 ])
 
+@app.callback(
+    Output(component_id='pie1', component_property='figure'),
+    [Input(component_id='dropdown1', component_property='value')]
+)
+
+def build_pie(column):
+    dff=df
+    fig = px.pie(dff,names=column)
+    fig.update_layout(paper_bgcolor="powderblue")
+    fig.update_traces(textinfo='percent+label')
+
+    return fig
 
 @app.callback(
-    Output('graph1', 'figure'),
-    [Input('dropdown1', 'value')]
+    Output(component_id='hist1', component_property='figure'),
+    [Input(component_id='dropdown2', component_property='value')]
 )
-# graph plot and styling
-def update_graph(value):
-    if value == 'cus':
-        xx = ['North indian', 'chinese', 'continental', 'cafe', 'fast food', 'south indian', 'italian', 'desserts',
-              'biryani', 'beverages']
-        y1 = x1
-        col = 'lightcoral'
-    if value == 'dish':
-        xx = ['pasta', 'burgers', 'cocktails', 'pizza', 'biryani', 'coffee', 'mocktails', 'sandwiches', 'paratha',
-              'noodles']
-        y1 = s1
-        col = 'skyblue'
-    return {'data': [go.Bar(
-        x=xx,
-        y=y1,
-        marker_color=col),
 
-    ],
-        'layout': go.Layout(
-            title='Top 10 cuisines',
-            plot_bgcolor='#26332a',
-            paper_bgcolor='#26332a',
-            xaxis_tickangle=-17,
+def build_hist(column):
+    dff=df
+    fig = px.histogram(dff,x=column,color=column)
+    fig.update_layout(paper_bgcolor="plum")
 
-            xaxis=dict(
-                # type='line',
-                title='Most liked dish',
-                showgrid=True,
-                showline=True,
-                color='white',
-                linewidth=1,
 
-            ),
-            yaxis=dict(
-                title='Count',
-                showgrid=True,
-                showline=True,
-                gridcolor='#bdbdbd',
-                color='white',
-                linewidth=1
-            ),
-            margin={'l': 60, 'b': 40, 't': 30, 'r': 60},
-            # legend={'x': 0.5, 'y': 1},
-            hovermode='closest',
+    return fig
 
-        )
-    }
+
+
+
+
 
 
 if __name__ == '__main__':
