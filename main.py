@@ -34,7 +34,7 @@ fig = go.Figure()
 
 px.set_mapbox_access_token("pk.eyJ1IjoiZWNjaGlmdWNrZXIiLCJhIjoiY2t3endqbGhxMGtpeTJ2bXJqOGg2b2RkZiJ9.PzATagpmMHlKAM4KB6AO9A")
 df['Description'] = ' '+ df['PERP_SEX'] + ', ' + df['PERP_RACE'] + ', ' + df['AGE_GROUP'] + ', ' + df['PD_DESC'].astype(str)
-fig5 = px.scatter_mapbox(df, lat="Latitude", lon="Longitude", color="ARREST_PRECINCT", text = "Description")
+map = px.scatter_mapbox(df, lat="Latitude", lon="Longitude", color="ARREST_PRECINCT", text = "Description",height = 1000)
 
 
 app.layout = dash_table.DataTable(
@@ -183,7 +183,7 @@ app.layout = html.Div([
             label='Map', children=[
                 html.Div([
 
-                    # dcc.Graph(figure=fig5),
+                    dcc.Graph(figure=map),
                 ],)
             ]),
 
